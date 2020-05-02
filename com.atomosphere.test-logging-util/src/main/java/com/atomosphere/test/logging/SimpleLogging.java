@@ -11,13 +11,45 @@ public class SimpleLogging {
 		return simpleLogging;
 	}
 
-	public static void forTest() {
+	public static void forClassDebug() {
 		of() //
 				.showDateTime() //
 				.showShortLogName() //
 				.showThreadName() //
 				.dateTimeFormat("yyyy-MM-dd HH:mm:ss:SSS") //
 				.loggingGroupLogLevel("DEBUG") //
+				.initialize() //
+		;
+	}
+
+	public static void forPackageDebug() {
+		Throwable t = new Throwable();
+		StackTraceElement[] stackTrace = t.getStackTrace();
+		SimpleLogging simpleLogging = new SimpleLogging();
+		if (stackTrace.length > 1) {
+			try {
+				simpleLogging.loggingGroup = Class.forName(stackTrace[1].getClassName()).getPackage().getName();
+			} catch (ClassNotFoundException e) {
+				simpleLogging.loggingGroup = stackTrace[1].getClassName();
+			}
+		}
+		simpleLogging //
+				.showDateTime() //
+				.showShortLogName() //
+				.showThreadName() //
+				.dateTimeFormat("yyyy-MM-dd HH:mm:ss:SSS") //
+				.loggingGroupLogLevel("DEBUG") //
+				.initialize() //
+		;
+	}
+
+	public static void forAllDebug() {
+		of() //
+				.showDateTime() //
+				.showShortLogName() //
+				.showThreadName() //
+				.dateTimeFormat("yyyy-MM-dd HH:mm:ss:SSS") //
+				.defalutLogLevel("DEBUG") //
 				.initialize() //
 		;
 	}
