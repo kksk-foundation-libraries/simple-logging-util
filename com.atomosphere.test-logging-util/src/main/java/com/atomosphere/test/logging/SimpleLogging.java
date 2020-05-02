@@ -10,14 +10,17 @@ public class SimpleLogging {
 		}
 		return simpleLogging;
 	}
-	/*
-	 * 
-		System.setProperty("org.slf4j.simpleLogger.showDateTime", "true");
-		System.setProperty("org.slf4j.simpleLogger.dateTimeFormat", "yyyy-MM-dd HH:mm:ss:SSS");
-		System.setProperty("org.slf4j.simpleLogger.showThreadName", "true");
-		System.setProperty("org.slf4j.simpleLogger.showShortLogName", "true");
-		System.setProperty("org.slf4j.simpleLogger.log." + ColferFileWriterTest.class.getPackage().getName(), "DEBUG");
-	 */
+
+	public static void forTest() {
+		of() //
+				.showDateTime() //
+				.showShortLogName() //
+				.showThreadName() //
+				.dateTimeFormat("yyyy-MM-dd HH:mm:ss:SSS") //
+				.loggingGroupLogLevel("DEBUG") //
+				.initialize() //
+		;
+	}
 
 	private SimpleLogging() {
 	}
